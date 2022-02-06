@@ -2,7 +2,7 @@
 // import Navbar from 'react-bootstrap/Navbar';
 // import Nav from 'react-bootstrap/Nav';
 // import { LinkContainer } from 'react-router-bootstrap';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import './AppNavbar.css';
 
 function AppNavbar() {
@@ -47,15 +47,18 @@ function AppNavbar() {
   );
 
   return (
-    <nav className='nav-bar'>
-      <ul className='nav-list'>
-        <li className='nav-home'>
-          <NavLink to='/'>Contact Manager</NavLink>
-        </li>
+    <>
+      <nav className='nav-bar'>
+        <ul className='nav-list'>
+          <li className='nav-home'>
+            <NavLink to='/'>Contact Manager</NavLink>
+          </li>
 
-        {authenticated ? authLinks : guestLinks}
-      </ul>
-    </nav>
+          {authenticated ? authLinks : guestLinks}
+        </ul>
+      </nav>
+      <Outlet />
+    </>
 
     // Change Navbar color and bg color by defining new class
     // <Navbar bg='dark' variant='dark'>

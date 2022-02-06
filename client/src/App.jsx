@@ -9,16 +9,21 @@ import Home from './components/Home';
 import SignIn from './components/user-access/SignIn';
 import SignUp from './components/user-access/SignUp';
 import ContactList from './components/contacts/ContactList';
+import Contact from './components/contacts/Contact';
 
 function App() {
   return (
     <Router>
-      <AppNavbar />
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='contacts' element={<ContactList />} />
-        <Route path='signin' element={<SignIn />} />
-        <Route path='signup' element={<SignUp />} />
+        <Route path='/' element={<AppNavbar />}>
+          <Route index element={<Home />} />
+          <Route path='contacts'>
+            <Route index element={<ContactList />} />
+            <Route path=':contact_id' element={<Contact />} />
+          </Route>
+          <Route path='signin' element={<SignIn />} />
+          <Route path='signup' element={<SignUp />} />
+        </Route>
       </Routes>
     </Router>
   );

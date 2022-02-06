@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { v1 as uuid } from 'uuid';
 import { BsPencilFill } from 'react-icons/bs';
+import { Outlet } from 'react-router-dom';
 
-import Contact from './Contact';
+import ContactRow from './ContactRow';
 import './ContactList.css';
 
 function ContactList() {
@@ -31,7 +32,7 @@ function ContactList() {
         <tbody className='table-data'>
           {contacts.length > 0 &&
             contacts.map((contact) => (
-              <Contact key={contact.id} contact={contact} />
+              <ContactRow key={contact.id} contact={contact} />
             ))}
         </tbody>
       </table>
