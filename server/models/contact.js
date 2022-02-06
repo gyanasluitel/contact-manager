@@ -12,6 +12,12 @@ const contactSchema = new Schema({
     type: Number,
     required: true,
   },
+  email: {
+    type: String,
+  },
+  address: {
+    type: String,
+  },
 });
 
 const Contact = model('Contact', contactSchema);

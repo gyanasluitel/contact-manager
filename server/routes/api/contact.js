@@ -17,9 +17,13 @@ router.get('/', (req, res) => {
 // @desc Create A Contact
 // @access will be Private (currently Public)
 router.post('/', (req, res) => {
+  const { name, phone, email, address } = req.body;
+
   const newContact = new Contact({
-    name: req.body.name,
-    phone: req.body.phone,
+    name,
+    phone,
+    email,
+    address,
   });
 
   newContact
