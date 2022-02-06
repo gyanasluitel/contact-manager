@@ -1,0 +1,31 @@
+.contact-container {
+  /* border: 2px solid green; */
+  margin: 2%;
+}
+
+.contact-heading {
+  color: #1b5585;
+  font-size: 25px;
+}
+
+.contact-list {
+  border-collapse: collapse;
+  border-radius: 1em;
+  margin-top: 2%;
+  overflow: hidden;
+  width: 100%;
+}
+
+.contact-list th,
+.contact-list td {
+  padding: 10px;
+}
+
+.contact-list th {
+  background-color: #4395d8;
+}
+
+.contact-list tr {
+  background-color: #d6e7f3;
+  border-bottom: 1px solid white;
+}
