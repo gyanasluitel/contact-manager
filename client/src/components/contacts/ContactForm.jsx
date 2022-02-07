@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { v1 as uuid } from 'uuid';
 
 import '../Form.css';
 import { postContact } from '../../actions/contactsActions';
@@ -20,7 +19,6 @@ function ContactForm() {
     event.preventDefault();
 
     const newContact = {
-      id: uuid(),
       name,
       phone,
       email,

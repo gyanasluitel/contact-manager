@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { getContacts } from '../../actions/contactsActions';
 import ContactRow from './ContactRow';
 import './ContactList.css';
+import Loader from '../loader/Loader';
 
 function ContactList() {
   const navigate = useNavigate();
@@ -17,10 +18,13 @@ function ContactList() {
   }, [dispatch]);
 
   const { contacts } = useSelector((state) => state.contacts);
+  const { isLoading } = useSelector((state) => state.contacts);
 
   const handleClick = () => {
     navigate('/addcontact');
   };
+
+  if (isLoading) return <Loader />;
 
   return (
     <div className='contact-container'>
@@ -46,7 +50,7 @@ function ContactList() {
         <tbody className='table-data'>
           {contacts.length > 0 &&
             contacts.map((contact) => (
-              <ContactRow key={contact.id} contact={contact} />
+              <ContactRow key={contact._id} contact={contact} />
             ))}
         </tbody>
       </table>

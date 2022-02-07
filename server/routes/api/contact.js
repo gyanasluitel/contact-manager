@@ -8,9 +8,7 @@ const Contact = require('../../models/contact');
 // @desc GET All Contacts
 // @access will be Private (currently Public)
 router.get('/', (req, res) => {
-  Contact.find()
-    .sort({ name: 'asc' })
-    .then((contacts) => res.json(contacts));
+  Contact.find().then((contacts) => res.json(contacts));
 });
 
 // @route POST /contacts

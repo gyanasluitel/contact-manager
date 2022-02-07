@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { deleteContact } from '../../actions/contactsActions';
 
 function ContactRow({ contact }) {
-  const { id, name } = contact;
+  const { _id, name, phone, address, email } = contact;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -15,14 +15,14 @@ function ContactRow({ contact }) {
   return (
     <tr>
       <td>{name}</td>
-      <td>-</td>
-      <td>-</td>
-      <td>-</td>
+      <td>{phone}</td>
+      <td>{address ? address : '-'}</td>
+      <td>{email ? email : '-'}</td>
       <td>
-        <button onClick={() => dispatch(deleteContact(id))}>Delete</button>
+        <button onClick={() => dispatch(deleteContact(_id))}>Delete</button>
       </td>
       <td>
-        <button onClick={() => goRouteId(id)}>Edit</button>
+        <button onClick={() => goRouteId(_id)}>Edit</button>
       </td>
     </tr>
   );

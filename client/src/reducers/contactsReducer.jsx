@@ -5,16 +5,12 @@ import {
   POST_CONTACT,
   DELETE_CONTACT,
   UPDATE_CONTACT,
+  CONTACT_LOADING,
 } from '../actions/types';
 
 const initialState = {
-  contacts: [
-    { id: uuid(), name: 'Gyanas' },
-    { id: uuid(), name: 'Utsav' },
-    { id: uuid(), name: 'Babin' },
-    { id: uuid(), name: 'Nischal' },
-    { id: uuid(), name: 'Harvard' },
-  ],
+  contacts: [],
+  isLoading: false,
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -23,19 +19,26 @@ export default function (state = initialState, action) {
     case GET_CONTACTS:
       return {
         ...state,
-        // contacts: action.payload
-      };
-    case DELETE_CONTACT:
-      return {
-        ...state,
-        contacts: state.contacts.filter(
-          (contact) => contact.id !== action.payload
-        ),
+        contacts: action.payload,
+        isLoading: false,
       };
     case POST_CONTACT:
       return {
         ...state,
         contacts: [action.payload, ...state.contacts],
+      };
+    case DELETE_CONTACT:
+      return {
+        ...state,
+        contacts: state.contacts.filter(
+          (contact) => contact._id !== action.payload
+        ),
+      };
+
+    case CONTACT_LOADING:
+      return {
+        ...state,
+        isLoading: true,
       };
     default:
       return state;
