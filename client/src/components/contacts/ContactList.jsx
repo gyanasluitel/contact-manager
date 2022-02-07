@@ -1,22 +1,22 @@
-import { useState } from 'react';
-import { v1 as uuid } from 'uuid';
+import { useEffect } from 'react';
 import { BsPencilFill } from 'react-icons/bs';
 import { Outlet } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
+import { getContacts } from '../../actions/contactsActions';
 import ContactRow from './ContactRow';
 import './ContactList.css';
 
-import { useNavigate } from 'react-router-dom';
-
 function ContactList() {
-  const [contacts, setContacts] = useState([
-    { id: uuid(), name: 'Gyanas' },
-    { id: uuid(), name: 'Utsav' },
-    { id: uuid(), name: 'Babin' },
-    { id: uuid(), name: 'Nischal' },
-  ]);
-
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getContacts());
+  }, [dispatch]);
+
+  const { contacts } = useSelector((state) => state.contacts);
 
   const handleClick = () => {
     navigate('/addcontact');
@@ -39,6 +39,8 @@ function ContactList() {
             <th>Phone</th>
             <th>Email</th>
             <th>Address</th>
+            <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody className='table-data'>

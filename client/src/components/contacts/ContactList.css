@@ -1,3 +1,17 @@
+.btn-add-contact {
+  border: 2px solid #1b5585;
+  background-color: #fff;
+  border-radius: 10px;
+  color: #1b5585;
+  margin-top: 30px;
+  padding: 8px;
+}
+
+.btn-add-contact:hover {
+  background-color: #1b5585;
+  color: #fff;
+}
+
 .contact-container {
   /* border: 2px solid green; */
   margin: 2%;
@@ -11,7 +25,7 @@
 .contact-list {
   border-collapse: collapse;
   border-radius: 1em;
-  margin-top: 2%;
+  margin-top: 10px;
   overflow: hidden;
   width: 100%;
 }
