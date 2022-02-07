@@ -10,6 +10,7 @@ import SignIn from './components/user-access/SignIn';
 import SignUp from './components/user-access/SignUp';
 import ContactList from './components/contacts/ContactList';
 import Contact from './components/contacts/Contact';
+import AddContact from './components/contacts/AddContact';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route index element={<ContactList />} />
             <Route path=':contact_id' element={<Contact />} />
           </Route>
+          <Route path='addcontact' element={<AddContact />} />
           <Route path='signin' element={<SignIn />} />
           <Route path='signup' element={<SignUp />} />
         </Route>

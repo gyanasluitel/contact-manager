@@ -6,6 +6,8 @@ import { Outlet } from 'react-router-dom';
 import ContactRow from './ContactRow';
 import './ContactList.css';
 
+import { useNavigate } from 'react-router-dom';
+
 function ContactList() {
   const [contacts, setContacts] = useState([
     { id: uuid(), name: 'Gyanas' },
@@ -14,11 +16,21 @@ function ContactList() {
     { id: uuid(), name: 'Nischal' },
   ]);
 
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/addcontact');
+  };
+
   return (
     <div className='contact-container'>
       <h1 className='contact-heading'>
         Contacts <BsPencilFill />
       </h1>
+
+      <button className='btn-add-contact' onClick={() => handleClick()}>
+        Add Contact
+      </button>
 
       <table className='contact-list'>
         <thead>
