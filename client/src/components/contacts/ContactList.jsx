@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { BsPencilFill } from 'react-icons/bs';
-import { Outlet } from 'react-router-dom';
+// import { Outlet } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 
 import { getContacts } from '../../actions/contactsActions';
 import ContactRow from './ContactRow';
@@ -15,15 +15,17 @@ function ContactList() {
 
   useEffect(() => {
     dispatch(getContacts());
-  }, [dispatch]);
+  }, []);
 
   const { contacts } = useSelector((state) => state.contacts);
   const { isLoading } = useSelector((state) => state.contacts);
+  const { isAuthenticated } = useSelector((state) => state.user);
 
   const handleClick = () => {
     navigate('/addcontact');
   };
 
+  if (!isAuthenticated) return <Navigate to='/signin' />;
   if (isLoading) return <Loader />;
 
   return (

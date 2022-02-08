@@ -1,16 +1,32 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
+import { signIn } from '../../actions/userActions';
+
 import '../Form.css';
 
 function SignIn() {
+  const [email, SetEmail] = useState('');
+  const [password, SetPassword] = useState('');
+
+  const { isAuthenticated } = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('Sign In Form Submitted');
+
+    const user = {
+      email,
+      password,
+    };
+
+    dispatch(signIn(user));
     SetEmail('');
     SetPassword('');
   };
 
-  const [email, SetEmail] = useState('');
-  const [password, SetPassword] = useState('');
+  if (isAuthenticated) return <Navigate to='/' />;
 
   return (
     <div>
@@ -43,10 +59,6 @@ function SignIn() {
 
         <button>Submit</button>
       </form>
-
-      <hr />
-      <p>Email: {email}</p>
-      <p>Password: {password}</p>
     </div>
   );
 }

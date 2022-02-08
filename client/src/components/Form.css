@@ -2,14 +2,18 @@
   border: 2px solid black;
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
+  margin: 10% auto;
   width: 80%;
 }
 
 .form-item {
-  border: 1px solid green;
+  /* border: 1px solid green; */
   display: flex;
   flex-direction: column;
   margin: 5px 0;
   padding: 10px;
+}
+
+.form-heading {
+  border: 1px solid red;
 }

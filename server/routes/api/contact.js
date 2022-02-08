@@ -1,20 +1,21 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../../middleware/auth');
 
 // Contact Model
 const Contact = require('../../models/contact');
 
 // @route GET /contacts
-// @desc GET All Contacts
+// @desc Get All Contacts
 // @access will be Private (currently Public)
-router.get('/', (req, res) => {
+router.get('/contacts', auth, (req, res) => {
   Contact.find().then((contacts) => res.json(contacts));
 });
 
 // @route POST /contacts
 // @desc Create A Contact
-// @access will be Private (currently Public)
-router.post('/', (req, res) => {
+// @access Private
+router.post('/contacts', auth, (req, res) => {
   const { name, phone, email, address } = req.body;
 
   const newContact = new Contact({
@@ -22,6 +23,7 @@ router.post('/', (req, res) => {
     phone,
     email,
     address,
+    // owner: req.user.id,
   });
 
   newContact
@@ -30,10 +32,30 @@ router.post('/', (req, res) => {
     .catch((err) => res.send(err));
 });
 
+// @route PUT /contacts/{contact_id}
+// @desc Update A Contact
+// @access Private
+router.put('/contacts/:contact_id', auth, (req, res) => {
+  const { name, phone, email, address } = req.body;
+
+  Contact.findByIdAndUpdate(
+    req.params.contact_id,
+    {
+      name,
+      phone,
+      email,
+      address,
+    },
+    { new: true }
+  )
+    .then((contact) => res.json(contact))
+    .catch((err) => res.send(err));
+});
+
 // @route DELETE /contacts/{contact_id}
 // @desc Delete A Contact
-// @access will be Private (currently Public)
-router.delete('/:contact_id', (req, res) => {
+// @access Private
+router.delete('/contacts/:contact_id', auth, (req, res) => {
   Contact.findById(req.params.contact_id)
     .then((contact) => contact.remove().then(() => res.json({ delete: true })))
     .catch((err) => res.status(404).send('No such contact found'));

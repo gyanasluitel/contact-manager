@@ -1,10 +1,12 @@
 import { Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 import Welcome from './Welcome';
 
 function Home() {
-  const authenticated = true;
+  const { isAuthenticated } = useSelector((state) => state.user);
 
-  return authenticated ? <Navigate to='contacts' /> : <Welcome />;
+  return isAuthenticated ? <Navigate to='contacts' /> : <Welcome />;
 }
 
 export default Home;

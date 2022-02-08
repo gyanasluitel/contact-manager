@@ -1,5 +1,3 @@
-import { v1 as uuid } from 'uuid';
-
 import {
   GET_CONTACTS,
   POST_CONTACT,
@@ -26,6 +24,13 @@ export default function (state = initialState, action) {
       return {
         ...state,
         contacts: [action.payload, ...state.contacts],
+      };
+    case UPDATE_CONTACT:
+      return {
+        ...state,
+        contacts: state.contacts.map((contact) =>
+          contact._id === action.payload._id ? action.payload : contact
+        ),
       };
     case DELETE_CONTACT:
       return {

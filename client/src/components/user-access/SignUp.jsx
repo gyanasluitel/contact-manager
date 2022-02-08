@@ -1,22 +1,47 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
+
 import '../Form.css';
+import { signUp } from '../../actions/userActions';
 
 function SignUp() {
+  const [email, SetEmail] = useState('');
+  const [password, SetPassword] = useState('');
+  // const [message, SetMessage] = useState(null);
+
+  const { isAuthenticated } = useSelector((state) => state.user);
+  // const error = useSelector((state) => state.error);
+
+  const dispatch = useDispatch();
+
+  // const mounted = useRef();
+  // useEffect(() => {
+  //   if (!mounted.current) {
+  //     mounted.current = true;
+  //   } else {
+  //     if ()
+  //   }
+  // })
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    const newUser = {
+      email,
+      password,
+    };
+
+    dispatch(signUp(newUser));
     console.log('Sign Up Form Submitted');
     SetEmail('');
     SetPassword('');
   };
 
-  const [email, SetEmail] = useState('');
-  const [password, SetPassword] = useState('');
-
+  if (isAuthenticated) return <Navigate to='/' />;
   return (
     <div>
-      <h1>Sign Up Form</h1>
-
       <form className='form' onSubmit={handleSubmit}>
+        <legend className='form-heading'>Sign Up</legend>
         <div className='form-item'>
           <label htmlFor='email'>Email:</label>
           <input
@@ -43,10 +68,6 @@ function SignUp() {
 
         <button>Submit</button>
       </form>
-
-      <hr />
-      <p>Email: {email}</p>
-      <p>Password: {password}</p>
     </div>
   );
 }

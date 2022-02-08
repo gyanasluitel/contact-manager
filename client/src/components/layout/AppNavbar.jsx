@@ -1,36 +1,24 @@
-// import Container from 'react-bootstrap/esm/Container';
-// import Navbar from 'react-bootstrap/Navbar';
-// import Nav from 'react-bootstrap/Nav';
-// import { LinkContainer } from 'react-router-bootstrap';
 import { NavLink, Outlet } from 'react-router-dom';
+// import { useState, useRef, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 import './AppNavbar.css';
+import { signOut } from '../../actions/userActions';
 
 function AppNavbar() {
-  const authenticated = false;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  // const authLinks = (
-  //   <Nav>
-  //     <LinkContainer to='/signout'>
-  //       <Nav.Link>Sign Out</Nav.Link>
-  //     </LinkContainer>
-  //   </Nav>
-  // );
-
-  // const guestLinks = (
-  //   <Nav>
-  //     <LinkContainer to='/signin'>
-  //       <Nav.Link>Sign In</Nav.Link>
-  //     </LinkContainer>
-  //     <LinkContainer to='/signup'>
-  //       <Nav.Link>Sign Up</Nav.Link>
-  //     </LinkContainer>
-  //   </Nav>
-  // );
+  const handleSignOut = () => {
+    dispatch(signOut());
+    navigate('/');
+  };
 
   const authLinks = (
     <ul className='nav-details'>
       <li className='nav-item'>
-        <NavLink to='/signout'>Sign Out</NavLink>
+        <button onClick={handleSignOut}>Sign Out</button>
       </li>
     </ul>
   );
@@ -46,6 +34,8 @@ function AppNavbar() {
     </ul>
   );
 
+  const { isAuthenticated } = useSelector((state) => state.user);
+
   return (
     <>
       <nav className='nav-bar'>
@@ -54,21 +44,11 @@ function AppNavbar() {
             <NavLink to='/'>Contact Manager</NavLink>
           </li>
 
-          {authenticated ? authLinks : guestLinks}
+          {isAuthenticated ? authLinks : guestLinks}
         </ul>
       </nav>
       <Outlet />
     </>
-
-    // Change Navbar color and bg color by defining new class
-    // <Navbar bg='dark' variant='dark'>
-    //   <Container>
-    //     <LinkContainer to='/'>
-    //       <Navbar.Brand>Home</Navbar.Brand>
-    //     </LinkContainer>
-    //     {authenticated ? authLinks : guestLinks}
-    //   </Container>
-    // </Navbar>
   );
 }
 

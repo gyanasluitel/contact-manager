@@ -8,32 +8,65 @@ import {
   CONTACT_LOADING,
 } from './types';
 
-export const getContacts = () => (dispatch) => {
+import { tokenConfig } from './userActions';
+import { returnErrors } from './errorActions';
+
+export const getContacts = () => (dispatch, getState) => {
   dispatch(setContactLoading());
-  axios.get('/contacts').then((res) =>
-    dispatch({
-      type: GET_CONTACTS,
-      payload: res.data,
-    })
-  );
+  axios
+    .get('/contacts', tokenConfig(getState))
+    .then((res) =>
+      dispatch({
+        type: GET_CONTACTS,
+        payload: res.data,
+      })
+    )
+    .catch((err) => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
 };
 
-export const postContact = (contact) => (dispatch) => {
-  axios.post('/contacts', contact).then((res) =>
-    dispatch({
-      type: POST_CONTACT,
-      payload: res.data,
-    })
-  );
+export const postContact = (contact) => (dispatch, getState) => {
+  axios
+    .post('/contacts', contact, tokenConfig(getState))
+    .then((res) =>
+      dispatch({
+        type: POST_CONTACT,
+        payload: res.data,
+      })
+    )
+    .catch((err) => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
 };
 
-export const deleteContact = (contact_id) => (dispatch) => {
-  axios.delete(`/contacts/${contact_id}`).then((res) =>
-    dispatch({
-      type: DELETE_CONTACT,
-      payload: contact_id,
-    })
-  );
+export const updateContact = (contact, contact_id) => (dispatch, getState) => {
+  axios
+    .put(`/contacts/${contact_id}`, contact, tokenConfig(getState))
+    .then((res) =>
+      dispatch({
+        type: UPDATE_CONTACT,
+        payload: res.data,
+      })
+    )
+    .catch((err) => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
+};
+
+export const deleteContact = (contact_id) => (dispatch, getState) => {
+  console.log(tokenConfig(getState));
+  axios
+    .delete(`/contacts/${contact_id}`, tokenConfig(getState))
+    .then((res) =>
+      dispatch({
+        type: DELETE_CONTACT,
+        payload: contact_id,
+      })
+    )
+    .catch((err) => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
 };
 
 export const setContactLoading = () => {

@@ -4,7 +4,7 @@
   "description": "Contact Manager built with the MERN stack",
   "main": "server.js",
   "scripts": {
-    "client-install": "cd ../client && npm install", 
+    "client-install": "cd ../client && npm install",
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "cd ../client && npm start",
@@ -13,9 +13,14 @@
   "author": "gyanasluitel",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
     "concurrently": "^7.0.0",
+    "config": "^3.3.7",
+    "cors": "^2.8.5",
     "express": "^4.17.2",
     "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.0",
     "path": "^0.12.7"
   },

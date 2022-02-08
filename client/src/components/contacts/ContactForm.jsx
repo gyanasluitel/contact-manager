@@ -1,18 +1,48 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import '../Form.css';
-import { postContact } from '../../actions/contactsActions';
+import { postContact, updateContact } from '../../actions/contactsActions';
+import Loader from '../loader/Loader';
 
-function ContactForm() {
+function ContactForm({ edit, selectedContact, id }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { isLoading } = useSelector((state) => state.contacts);
 
   const [name, SetName] = useState('');
   const [phone, SetPhone] = useState('');
   const [email, SetEmail] = useState('');
   const [address, SetAddress] = useState('');
+
+  useEffect(() => {
+    SetName(
+      selectedContact ? (selectedContact.name ? selectedContact.name : '') : ''
+    );
+    SetPhone(
+      selectedContact
+        ? selectedContact.phone
+          ? selectedContact.phone
+          : ''
+        : ''
+    );
+    SetEmail(
+      selectedContact
+        ? selectedContact.email
+          ? selectedContact.email
+          : ''
+        : ''
+    );
+    SetAddress(
+      selectedContact
+        ? selectedContact.address
+          ? selectedContact.address
+          : ''
+        : ''
+    );
+  }, []);
 
   // Change contact form 'Content-Type' to multipart/form-data
   const handleSubmit = (event) => {
@@ -25,18 +55,23 @@ function ContactForm() {
       address,
     };
 
-    dispatch(postContact(newContact));
+    edit
+      ? dispatch(updateContact(newContact, id))
+      : dispatch(postContact(newContact));
+
     SetName('');
     SetPhone('');
     SetEmail('');
     SetAddress('');
-    console.log('Contact Form Submitted');
-    navigate('/');
+    setTimeout(() => {
+      navigate('/');
+    }, 1000);
   };
 
+  if (isLoading) return <Loader />;
   return (
     <div>
-      <h1>Contact Form</h1>
+      <h3>{edit ? 'Edit Contact' : 'Add a New Contact'}</h3>
 
       <form className='form' onSubmit={handleSubmit}>
         <div className='form-item'>
@@ -87,12 +122,6 @@ function ContactForm() {
 
         <button>Submit</button>
       </form>
-
-      <hr />
-      <p>Name: {name}</p>
-      <p>Phone: {phone}</p>
-      <p>Email: {email}</p>
-      <p>Address: {address}</p>
     </div>
   );
 }

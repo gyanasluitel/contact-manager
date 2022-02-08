@@ -2,17 +2,26 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import AppNavbar from './components/layout/AppNavbar';
 import Home from './components/Home';
 import SignIn from './components/user-access/SignIn';
 import SignUp from './components/user-access/SignUp';
 import ContactList from './components/contacts/ContactList';
-import Contact from './components/contacts/Contact';
-import ContactForm from './components/contacts/ContactForm';
+import AddContact from './components/contacts/AddContact';
+import EditContact from './components/contacts/EditContact';
 import store from './store';
+import { getContacts } from './actions/contactsActions';
+import { loadUser } from './actions/userActions';
 
 function App() {
+  useEffect(() => {
+    store.dispatch(loadUser());
+    store.dispatch(getContacts());
+  }, []);
+
   return (
     <Provider store={store}>
       <Router>
@@ -21,11 +30,19 @@ function App() {
             <Route index element={<Home />} />
             <Route path='contacts'>
               <Route index element={<ContactList />} />
-              <Route path=':contact_id' element={<Contact />} />
+              <Route path=':contact_id' element={<EditContact />} />
             </Route>
-            <Route path='addcontact' element={<ContactForm />} />
+            <Route path='addcontact' element={<AddContact />} />
             <Route path='signin' element={<SignIn />} />
             <Route path='signup' element={<SignUp />} />
+            <Route
+              path='*'
+              element={
+                <main style={{ padding: '1rem' }}>
+                  <p>There's nothing here!</p>
+                </main>
+              }
+            />
           </Route>
         </Routes>
       </Router>
