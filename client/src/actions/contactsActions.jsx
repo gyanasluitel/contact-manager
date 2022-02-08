@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 
 import {
   GET_CONTACTS,
@@ -43,14 +44,17 @@ export const postContact = (contact) => (dispatch, getState) => {
 export const updateContact = (contact, contact_id) => (dispatch, getState) => {
   axios
     .put(`/contacts/${contact_id}`, contact, tokenConfig(getState))
-    .then((res) =>
-      dispatch({
-        type: UPDATE_CONTACT,
-        payload: res.data,
-      })
+    .then(
+      (res) =>
+        dispatch({
+          type: UPDATE_CONTACT,
+          payload: res.data,
+        })
+      // toast.success('Contact Updated')
     )
     .catch((err) => {
       dispatch(returnErrors(err.response.data, err.response.status));
+      toast.error('Error');
     });
 };
 

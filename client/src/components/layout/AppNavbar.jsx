@@ -2,7 +2,8 @@ import { NavLink, Outlet } from 'react-router-dom';
 // import { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './AppNavbar.css';
 import { signOut } from '../../actions/userActions';
 
@@ -12,6 +13,7 @@ function AppNavbar() {
 
   const handleSignOut = () => {
     dispatch(signOut());
+    toast.success('Signed out');
     navigate('/');
   };
 
@@ -49,6 +51,17 @@ function AppNavbar() {
           {isAuthenticated ? authLinks : guestLinks}
         </ul>
       </nav>
+      <ToastContainer
+        position='top-right'
+        autoClose={200}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+      />{' '}
       <Outlet />
     </>
   );

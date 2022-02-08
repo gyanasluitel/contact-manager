@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import '../Form.css';
 import { postContact, updateContact } from '../../actions/contactsActions';
@@ -59,6 +61,11 @@ function ContactForm({ edit, selectedContact, id }) {
       ? dispatch(updateContact(newContact, id))
       : dispatch(postContact(newContact));
 
+    // toast.success('Contact Updated');
+
+    // setTimeout(() => {
+    //   navigate('/');
+    // }, 800);
     SetName('');
     SetPhone('');
     SetEmail('');
@@ -125,6 +132,17 @@ function ContactForm({ edit, selectedContact, id }) {
 
         <button className='btn-submit-form'>Submit</button>
       </form>
+      <ToastContainer
+        position='top-right'
+        autoClose={200}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+      />
     </div>
   );
 }

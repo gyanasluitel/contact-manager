@@ -17,8 +17,8 @@ function ContactRow({ contact }) {
     <tr>
       <td>{name}</td>
       <td>{phone}</td>
-      <td>{address ? address : '-'}</td>
       <td>{email ? email : '-'}</td>
+      <td>{address ? address : '-'}</td>
       <td>
         <button
           className='btn-contact btn-delete'
