@@ -18,7 +18,9 @@ function AppNavbar() {
   const authLinks = (
     <ul className='nav-details'>
       <li className='nav-item'>
-        <button onClick={handleSignOut}>Sign Out</button>
+        <button className='btn-signout' onClick={handleSignOut}>
+          Sign Out
+        </button>
       </li>
     </ul>
   );

@@ -26,6 +26,7 @@ function ContactList() {
   };
 
   if (!isAuthenticated) return <Navigate to='/signin' />;
+
   if (isLoading) return <Loader />;
 
   return (

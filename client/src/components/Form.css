@@ -1,9 +1,10 @@
 .form {
-  border: 2px solid black;
+  border: 1px solid rgb(199, 191, 191);
   display: flex;
   flex-direction: column;
   margin: 10% auto;
   width: 80%;
+  max-width: 600px;
 }
 
 .form-item {
@@ -15,5 +16,28 @@
 }
 
 .form-heading {
-  border: 1px solid red;
+  text-align: center;
+  padding: 10px 0;
+  background-color: #1b5585;
+  color: #fff;
+}
+
+.btn-submit-form {
+  border: 2px solid #1b5585;
+  background-color: #fff;
+  border-radius: 5px;
+  color: #1b5585;
+  margin: 10px auto;
+  width: 50%;
+  padding: 8px;
+}
+
+.btn-submit-form:hover {
+  background-color: #1b5585;
+  color: #fff;
+}
+
+.form-input {
+  margin-top: 2px;
+  padding: 5px;
 }

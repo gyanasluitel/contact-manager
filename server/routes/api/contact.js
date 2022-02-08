@@ -7,9 +7,9 @@ const Contact = require('../../models/contact');
 
 // @route GET /contacts
 // @desc Get All Contacts
-// @access will be Private (currently Public)
+// @access Private
 router.get('/contacts', auth, (req, res) => {
-  Contact.find().then((contacts) => res.json(contacts));
+  Contact.find({ owner: req.user.id }).then((contacts) => res.json(contacts));
 });
 
 // @route POST /contacts
@@ -23,7 +23,7 @@ router.post('/contacts', auth, (req, res) => {
     phone,
     email,
     address,
-    // owner: req.user.id,
+    owner: req.user.id,
   });
 
   newContact
@@ -38,8 +38,8 @@ router.post('/contacts', auth, (req, res) => {
 router.put('/contacts/:contact_id', auth, (req, res) => {
   const { name, phone, email, address } = req.body;
 
-  Contact.findByIdAndUpdate(
-    req.params.contact_id,
+  Contact.findOneAndUpdate(
+    { _id: req.params.contact_id, owner: req.user.id },
     {
       name,
       phone,
@@ -56,9 +56,15 @@ router.put('/contacts/:contact_id', auth, (req, res) => {
 // @desc Delete A Contact
 // @access Private
 router.delete('/contacts/:contact_id', auth, (req, res) => {
-  Contact.findById(req.params.contact_id)
-    .then((contact) => contact.remove().then(() => res.json({ delete: true })))
-    .catch((err) => res.status(404).send('No such contact found'));
+  Contact.findOneAndDelete({ _id: req.params.contact_id, owner: req.user.id })
+    .then((contact) => res.json(contact))
+    .catch((err) => res.send(err));
+
+  // Contact.findById(req.params.contact_id)
+  //   .then((contact) =>
+  //     contact.remove().then(() => res.json({ delete: true }))
+  //   )
+  //   .catch((err) => res.status(404).send('No such contact found'));
 });
 
 module.exports = router;

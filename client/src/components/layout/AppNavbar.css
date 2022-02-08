@@ -1,3 +1,16 @@
+.btn-signout {
+  border: 2px solid #1b5585;
+  background-color: #fff;
+  border-radius: 10px;
+  color: #1b5585;
+  padding: 6px;
+}
+
+.btn-signout:hover {
+  background-color: #1b5585;
+  color: #fff;
+}
+
 .nav-bar {
   background-color: #fff;
   border-bottom: 2px solid rgb(221, 214, 214);

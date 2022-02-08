@@ -21,22 +21,18 @@ function EditContact() {
 
   const selectedContact = contacts.filter((contact) => contact._id === id)[0];
 
-  const noContact = (
-    <div>
-      <p>No such contact</p>
-      <p>You will be redirected to the Home Page</p>
-    </div>
-  );
+  // const noContact = (
+  //   <div>
+  //     <p>No such contact</p>
+  //     <p>You will be redirected to the Home Page</p>
+  //   </div>
+  // );
 
   if (isLoading) return <Loader />;
 
   return (
     <div>
-      {selectedContact ? (
-        <ContactForm edit={true} selectedContact={selectedContact} id={id} />
-      ) : (
-        (noContact, (<Navigate to='/' />))
-      )}
+      <ContactForm edit={true} selectedContact={selectedContact} id={id} />
     </div>
   );
 }

@@ -18,11 +18,11 @@ const contactSchema = new Schema({
   address: {
     type: String,
   },
-  // owner: {
-  //   type: Schema.Types.ObjectId,
-  //   required: true,
-  //   ref: 'User',
-  // },
+  owner: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'User',
+  },
 });
 
 const Contact = model('Contact', contactSchema);

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 import '../Form.css';
 import { postContact, updateContact } from '../../actions/contactsActions';
@@ -63,17 +63,16 @@ function ContactForm({ edit, selectedContact, id }) {
     SetPhone('');
     SetEmail('');
     SetAddress('');
-    setTimeout(() => {
-      navigate('/');
-    }, 1000);
+    navigate('/');
   };
 
   if (isLoading) return <Loader />;
   return (
     <div>
-      <h3>{edit ? 'Edit Contact' : 'Add a New Contact'}</h3>
-
       <form className='form' onSubmit={handleSubmit}>
+        <legend className='form-heading'>
+          {edit ? 'Edit Contact' : 'Add a New Contact'}
+        </legend>
         <div className='form-item'>
           <label htmlFor='name'>Name:</label>
           <input
@@ -120,7 +119,7 @@ function ContactForm({ edit, selectedContact, id }) {
           />
         </div>
 
-        <button>Submit</button>
+        <button className='btn-submit-form'>Submit</button>
       </form>
     </div>
   );

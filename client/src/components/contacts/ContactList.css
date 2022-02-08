@@ -12,6 +12,28 @@
   color: #fff;
 }
 
+.btn-contact {
+  border: 1px solid #1b5585;
+  background-color: #fff;
+  border-radius: 10px;
+  color: #1b5585;
+  padding: 8px;
+}
+
+.btn-contact:hover {
+  background-color: #1b5585;
+  color: #fff;
+}
+
+.btn-delete {
+  border: 1px solid rgb(207, 16, 16);
+  color: rgb(207, 16, 16);
+}
+
+.btn-delete:hover {
+  background-color: rgb(207, 16, 16);
+}
+
 .contact-container {
   /* border: 2px solid green; */
   margin: 2%;

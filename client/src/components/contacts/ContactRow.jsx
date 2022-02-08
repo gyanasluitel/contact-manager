@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { deleteContact } from '../../actions/contactsActions';
+import './ContactList.css';
 
 function ContactRow({ contact }) {
   const { _id, name, phone, address, email } = contact;
@@ -19,10 +20,17 @@ function ContactRow({ contact }) {
       <td>{address ? address : '-'}</td>
       <td>{email ? email : '-'}</td>
       <td>
-        <button onClick={() => dispatch(deleteContact(_id))}>Delete</button>
+        <button
+          className='btn-contact btn-delete'
+          onClick={() => dispatch(deleteContact(_id))}
+        >
+          Delete
+        </button>
       </td>
       <td>
-        <button onClick={() => goRouteId(_id)}>Edit</button>
+        <button className='btn-contact' onClick={() => goRouteId(_id)}>
+          Edit
+        </button>
       </td>
     </tr>
   );

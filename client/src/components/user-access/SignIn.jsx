@@ -30,16 +30,16 @@ function SignIn() {
 
   return (
     <div>
-      <h1>Sign In Form</h1>
-
       <form className='form' onSubmit={handleSubmit}>
+        <legend className='form-heading'>Sign In To Your Account</legend>
         <div className='form-item'>
           <label htmlFor='email'>Email:</label>
           <input
             type='email'
-            placeholder='Enter Email'
+            placeholder='example@gmail.com'
             value={email}
             name='email'
+            className='form-input'
             onChange={(event) => SetEmail(event.target.value)}
             required
           />
@@ -49,15 +49,16 @@ function SignIn() {
           <label htmlFor='password'>Password:</label>
           <input
             type='password'
-            placeholder='Enter Password'
+            placeholder='*******'
             value={password}
             name='password'
+            className='form-input'
             onChange={(event) => SetPassword(event.target.value)}
             required
           />
         </div>
 
-        <button>Submit</button>
+        <button className='btn-submit-form'>Submit</button>
       </form>
     </div>
   );
