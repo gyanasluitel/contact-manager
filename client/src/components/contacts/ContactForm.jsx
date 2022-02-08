@@ -80,6 +80,7 @@ function ContactForm({ edit, selectedContact, id }) {
             placeholder='Enter Name'
             value={name}
             name='name'
+            className='form-input'
             onChange={(event) => SetName(event.target.value)}
             required
           />
@@ -92,6 +93,7 @@ function ContactForm({ edit, selectedContact, id }) {
             placeholder='Enter Phone Number'
             value={phone}
             name='phone'
+            className='form-input'
             onChange={(event) => SetPhone(event.target.value)}
             required
           />
@@ -104,6 +106,7 @@ function ContactForm({ edit, selectedContact, id }) {
             placeholder='Enter E-mail'
             value={email}
             name='email'
+            className='form-input'
             onChange={(event) => SetEmail(event.target.value)}
           />
         </div>
@@ -115,6 +118,7 @@ function ContactForm({ edit, selectedContact, id }) {
             placeholder='Enter Address'
             value={address}
             name='address'
+            className='form-input'
             onChange={(event) => SetAddress(event.target.value)}
           />
         </div>

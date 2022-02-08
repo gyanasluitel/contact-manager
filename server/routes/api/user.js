@@ -4,6 +4,8 @@ const router = express.Router();
 const config = require('config');
 const jwt = require('jsonwebtoken');
 const auth = require('../../middleware/auth');
+const validation = require('../../middleware/validator');
+const schema = require('../../utils/schema');
 
 // Contact Model
 const User = require('../../models/user');
