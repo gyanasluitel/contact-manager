@@ -52,14 +52,14 @@ function ContactRow({ contact }) {
             className='btn-contact'
             onClick={() => handleFavoriteTrue(_id)}
           >
-            Not Favorite
+            Remove Favourite
           </button>
         ) : (
           <button
             className='btn-contact'
             onClick={() => handleFavoriteFalse(_id)}
           >
-            Favorite
+            Add to Favourite
           </button>
         )}
       </td>
