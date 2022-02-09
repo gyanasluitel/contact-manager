@@ -52,7 +52,7 @@ function ContactRow({ contact }) {
             className='btn-contact'
             onClick={() => handleFavoriteTrue(_id)}
           >
-            UnFavorite
+            Not Favorite
           </button>
         ) : (
           <button

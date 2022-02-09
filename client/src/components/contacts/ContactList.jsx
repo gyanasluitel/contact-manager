@@ -46,7 +46,7 @@ function ContactList() {
             <th>Phone</th>
             <th>Email</th>
             <th>Address</th>
-            <th>Favorite</th>
+            <th></th>
             <th></th>
             <th></th>
           </tr>
