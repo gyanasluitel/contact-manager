@@ -12,6 +12,8 @@ function ContactForm({ edit, selectedContact, id }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const { isAuthenticated } = useSelector((state) => state.user);
+
   const { isLoading } = useSelector((state) => state.contacts);
 
   const [name, SetName] = useState('');
@@ -69,6 +71,8 @@ function ContactForm({ edit, selectedContact, id }) {
     SetAddress('');
     navigate('/');
   };
+
+  if (!isAuthenticated) return <Navigate to='/signin' />;
 
   if (isLoading) return <Loader />;
   return (
