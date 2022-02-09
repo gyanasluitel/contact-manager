@@ -1,8 +1,24 @@
+.btn-goback {
+  border: 2px solid #1b5585;
+  background-color: #fff;
+  border-radius: 5px;
+  color: #1b5585;
+  margin-top: 40px;
+  margin-left: 20px;
+  width: 100px;
+  padding: 8px;
+}
+
+.btn-goback:hover {
+  background-color: #1b5585;
+  color: #fff;
+}
+
 .form {
   border: 1px solid rgb(199, 191, 191);
   display: flex;
   flex-direction: column;
-  margin: 10% auto;
+  margin: 3% auto;
   width: 80%;
   max-width: 600px;
 }

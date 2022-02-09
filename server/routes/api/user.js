@@ -15,7 +15,7 @@ const User = require('../../models/user');
 // @access Public
 router.post('/signup', (req, res) => {
   const { email, password } = req.body;
-  // console.log(email, password);
+
   // Validation
   if (!email || !password) {
     return res.status(400).json({ msg: 'Please enter all the fields' });

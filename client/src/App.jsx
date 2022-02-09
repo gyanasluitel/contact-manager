@@ -15,6 +15,7 @@ import EditContact from './components/contacts/EditContact';
 import store from './store';
 import { getContacts } from './actions/contactsActions';
 import { loadUser } from './actions/userActions';
+import ErrorPage from './ErrorPage';
 
 function App() {
   useEffect(() => {
@@ -35,14 +36,7 @@ function App() {
             <Route path='addcontact' element={<AddContact />} />
             <Route path='signin' element={<SignIn />} />
             <Route path='signup' element={<SignUp />} />
-            <Route
-              path='*'
-              element={
-                <main style={{ padding: '1rem' }}>
-                  <p>There's nothing here!</p>
-                </main>
-              }
-            />
+            <Route path='*' element={<ErrorPage />} />
           </Route>
         </Routes>
       </Router>

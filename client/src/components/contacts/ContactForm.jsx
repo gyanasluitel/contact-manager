@@ -18,6 +18,7 @@ function ContactForm({ edit, selectedContact, id }) {
   const [phone, SetPhone] = useState('');
   const [email, SetEmail] = useState('');
   const [address, SetAddress] = useState('');
+  // const [image, setImage] = useState('');
 
   useEffect(() => {
     SetName(
@@ -62,10 +63,6 @@ function ContactForm({ edit, selectedContact, id }) {
       : dispatch(postContact(newContact));
 
     // toast.success('Contact Updated');
-
-    // setTimeout(() => {
-    //   navigate('/');
-    // }, 800);
     SetName('');
     SetPhone('');
     SetEmail('');
@@ -76,6 +73,10 @@ function ContactForm({ edit, selectedContact, id }) {
   if (isLoading) return <Loader />;
   return (
     <div>
+      <button className='btn-goback' onClick={() => navigate('/')}>
+        {' '}
+        Go Back
+      </button>
       <form className='form' onSubmit={handleSubmit}>
         <legend className='form-heading'>
           {edit ? 'Edit Contact' : 'Add a New Contact'}

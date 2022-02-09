@@ -71,12 +71,6 @@ router.delete('/contacts/:contact_id', auth, (req, res) => {
   Contact.findOneAndDelete({ _id: req.params.contact_id, owner: req.user.id })
     .then((contact) => res.json(contact))
     .catch((err) => res.send(err));
-
-  // Contact.findById(req.params.contact_id)
-  //   .then((contact) =>
-  //     contact.remove().then(() => res.json({ delete: true }))
-  //   )
-  //   .catch((err) => res.status(404).send('No such contact found'));
 });
 
 module.exports = router;

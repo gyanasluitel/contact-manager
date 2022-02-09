@@ -1,0 +1,21 @@
+.welcome-container {
+  border: 1px solid rgb(218, 212, 212);
+  width: 50%;
+  height: 50%;
+  position: fixed;
+  left: 25%;
+  top: 25%;
+}
+
+.msg-heading {
+  text-align: center;
+  padding: 20px 0;
+  background-color: #1b5585;
+  color: #fff;
+  margin-bottom: 50px;
+}
+
+.msg-content {
+  text-align: center;
+  font-size: 20px;
+}
