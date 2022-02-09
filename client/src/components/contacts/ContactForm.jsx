@@ -98,7 +98,7 @@ function ContactForm({ edit, selectedContact, id }) {
           <label htmlFor='phone'>Phone: </label>
           <input
             type='number'
-            placeholder='Enter Phone Number'
+            placeholder='7 digits or number'
             value={phone}
             name='phone'
             className='form-input'
@@ -111,7 +111,7 @@ function ContactForm({ edit, selectedContact, id }) {
           <label htmlFor='email'>Email:</label>
           <input
             type='email'
-            placeholder='Enter E-mail'
+            placeholder='example@gmail.com'
             value={email}
             name='email'
             className='form-input'
