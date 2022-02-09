@@ -18,6 +18,10 @@ const contactSchema = new Schema({
   address: {
     type: String,
   },
+  isFavorite: {
+    type: Boolean,
+    default: false,
+  },
   owner: {
     type: Schema.Types.ObjectId,
     required: true,

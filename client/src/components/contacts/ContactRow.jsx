@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { deleteContact } from '../../actions/contactsActions';
 import './ContactList.css';
+import { useState } from 'react';
 
 function ContactRow({ contact }) {
   const { _id, name, phone, address, email } = contact;
@@ -13,6 +14,8 @@ function ContactRow({ contact }) {
     navigate(`${id}`);
   };
 
+  const handleFavorite = (id) => {};
+
   return (
     <tr>
       <td>{name}</td>
@@ -20,16 +23,21 @@ function ContactRow({ contact }) {
       <td>{email ? email : '-'}</td>
       <td>{address ? address : '-'}</td>
       <td>
-        <button
-          className='btn-contact btn-delete'
-          onClick={() => dispatch(deleteContact(_id))}
-        >
-          Delete
+        <button className='btn-contact' onClick={handleFavorite(_id)}>
+          Favorite
         </button>
       </td>
       <td>
         <button className='btn-contact' onClick={() => goRouteId(_id)}>
           Edit
+        </button>
+      </td>
+      <td>
+        <button
+          className='btn-contact btn-delete'
+          onClick={() => dispatch(deleteContact(_id))}
+        >
+          Delete
         </button>
       </td>
     </tr>
