@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { deleteContact } from '../../actions/contactsActions';
+import { deleteContact, updateFavorite } from '../../actions/contactsActions';
 import './ContactList.css';
 import { useState } from 'react';
 
 function ContactRow({ contact }) {
-  const { _id, name, phone, address, email } = contact;
+  const { _id, name, phone, address, email, isFavorite } = contact;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -14,7 +14,31 @@ function ContactRow({ contact }) {
     navigate(`${id}`);
   };
 
-  const handleFavorite = (id) => {};
+  const [favorite, SetFavorite] = useState(isFavorite);
+
+  const handleFavoriteTrue = (id) => {
+    SetFavorite(!favorite);
+    const contact = {
+      name,
+      phone,
+      email,
+      address,
+      isFavorite: false,
+    };
+    dispatch(updateFavorite(contact, id));
+  };
+
+  const handleFavoriteFalse = (id) => {
+    SetFavorite(!favorite);
+    const contact = {
+      name,
+      phone,
+      email,
+      address,
+      isFavorite: true,
+    };
+    dispatch(updateFavorite(contact, id));
+  };
 
   return (
     <tr>
@@ -23,9 +47,21 @@ function ContactRow({ contact }) {
       <td>{email ? email : '-'}</td>
       <td>{address ? address : '-'}</td>
       <td>
-        <button className='btn-contact' onClick={handleFavorite(_id)}>
-          Favorite
-        </button>
+        {favorite ? (
+          <button
+            className='btn-contact'
+            onClick={() => handleFavoriteTrue(_id)}
+          >
+            UnFavorite
+          </button>
+        ) : (
+          <button
+            className='btn-contact'
+            onClick={() => handleFavoriteFalse(_id)}
+          >
+            Favorite
+          </button>
+        )}
       </td>
       <td>
         <button className='btn-contact' onClick={() => goRouteId(_id)}>

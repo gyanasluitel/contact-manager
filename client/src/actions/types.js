@@ -4,6 +4,7 @@ export const POST_CONTACT = 'POST_CONTACT';
 export const DELETE_CONTACT = 'DELETE_CONTACT';
 export const UPDATE_CONTACT = 'UPDATE_CONTACT';
 export const CONTACT_LOADING = 'CONTACT_LOADING';
+export const UPDATE_FAVORITE = 'UPDATE_FAVORITE';
 
 // user actions
 export const USER_LOADING = 'USER_LOADING';
