@@ -23,6 +23,8 @@ const storage = new CloudinaryStorage({
   },
 });
 
-const parser = multer({ storage: storage });
+// const parser = multer({ storage: storage }, (req, res, next) {
+//   if
+// });
 
 module.exports = parser;
