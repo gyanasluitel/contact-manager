@@ -8,6 +8,6 @@ exports.userSchema = Joi.object({
 exports.contactSchema = Joi.object({
   name: Joi.string().min(5).required(),
   phone: Joi.number().min(7).integer().required(),
-  email: Joi.string().email({ minDomainSegments: 2 }),
-  address: Joi.string().min(3),
+  email: Joi.string().email({ minDomainSegments: 2 }).allow(''),
+  address: Joi.string().min(3).allow(''),
 }).options({ allowUnknown: true });
