@@ -21,6 +21,10 @@
   margin: 3% auto;
   width: 80%;
   max-width: 600px;
+  position: fixed;
+  left: 10%;
+  right: 10%;
+  top: 25%;
 }
 
 .form-item {
