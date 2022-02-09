@@ -46,15 +46,27 @@ function ContactList() {
             <th>Phone</th>
             <th>Email</th>
             <th>Address</th>
+            <th>Favorite</th>
             <th></th>
             <th></th>
           </tr>
         </thead>
         <tbody className='table-data'>
           {contacts.length > 0 &&
-            contacts.map((contact) => (
-              <ContactRow key={contact._id} contact={contact} />
-            ))}
+            contacts
+              .filter((contact) => contact.isFavorite)
+              .sort((a, b) => a.name.localeCompare(b.name))
+              .map((contact) => (
+                <ContactRow key={contact._id} contact={contact} />
+              ))}
+
+          {contacts.length > 0 &&
+            contacts
+              .filter((contact) => !contact.isFavorite)
+              .sort((a, b) => a.name.localeCompare(b.name))
+              .map((contact) => (
+                <ContactRow key={contact._id} contact={contact} />
+              ))}
         </tbody>
       </table>
     </div>

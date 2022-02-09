@@ -7,6 +7,7 @@ import {
   DELETE_CONTACT,
   UPDATE_CONTACT,
   CONTACT_LOADING,
+  UPDATE_FAVORITE,
 } from './types';
 
 import { tokenConfig } from './userActions';
@@ -58,8 +59,22 @@ export const updateContact = (contact, contact_id) => (dispatch, getState) => {
     });
 };
 
+export const updateFavorite = (contact, contact_id) => (dispatch, getState) => {
+  axios
+    .put(`/contacts/${contact_id}`, contact, tokenConfig(getState))
+    .then((res) =>
+      dispatch({
+        type: UPDATE_FAVORITE,
+        payload: res.data,
+      })
+    )
+    .catch((err) => {
+      console.log(err);
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
+};
+
 export const deleteContact = (contact_id) => (dispatch, getState) => {
-  console.log(tokenConfig(getState));
   axios
     .delete(`/contacts/${contact_id}`, tokenConfig(getState))
     .then((res) =>

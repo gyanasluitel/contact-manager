@@ -10,4 +10,5 @@ exports.contactSchema = Joi.object({
   phone: Joi.number().min(7).integer().required(),
   email: Joi.string().email({ minDomainSegments: 2 }).allow(''),
   address: Joi.string().min(3).allow(''),
+  isFavorite: Joi.boolean(),
 }).options({ allowUnknown: true });

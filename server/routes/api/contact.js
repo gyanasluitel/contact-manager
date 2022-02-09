@@ -22,13 +22,14 @@ router.post(
   auth,
   validation.validateBody(schema.contactSchema),
   (req, res) => {
-    const { name, phone, email, address } = req.body;
+    const { name, phone, email, address, isFavorite } = req.body;
 
     const newContact = new Contact({
       name,
       phone,
       email,
       address,
+      isFavorite,
       owner: req.user.id,
     });
 
@@ -47,7 +48,7 @@ router.put(
   auth,
   validation.validateBody(schema.contactSchema),
   (req, res) => {
-    const { name, phone, email, address } = req.body;
+    const { name, phone, email, address, isFavorite } = req.body;
 
     Contact.findOneAndUpdate(
       { _id: req.params.contact_id, owner: req.user.id },
@@ -56,6 +57,7 @@ router.put(
         phone,
         email,
         address,
+        isFavorite,
       },
       { new: true }
     )

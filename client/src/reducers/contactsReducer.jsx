@@ -4,6 +4,7 @@ import {
   DELETE_CONTACT,
   UPDATE_CONTACT,
   CONTACT_LOADING,
+  UPDATE_FAVORITE,
 } from '../actions/types';
 
 import { Navigate } from 'react-router-dom';
@@ -34,6 +35,15 @@ export default function (state = initialState, action) {
           contact._id === action.payload._id ? action.payload : contact
         ),
       };
+    case UPDATE_FAVORITE: {
+      // let index = state.contacts.findIndex(contact => contact._id === action.payload._id)
+      return {
+        ...state,
+        contacts: state.contacts.map((contact) =>
+          contact._id === action.payload._id ? action.payload : contact
+        ),
+      };
+    }
     case DELETE_CONTACT:
       return {
         ...state,
