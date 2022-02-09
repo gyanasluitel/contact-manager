@@ -18,7 +18,7 @@ function ContactForm({ edit, selectedContact, id }) {
   const [phone, SetPhone] = useState('');
   const [email, SetEmail] = useState('');
   const [address, SetAddress] = useState('');
-  // const [image, setImage] = useState('');
+  const [image, setImage] = useState(null);
 
   useEffect(() => {
     SetName(
@@ -45,18 +45,27 @@ function ContactForm({ edit, selectedContact, id }) {
           : ''
         : ''
     );
+    setImage(
+      selectedContact
+        ? selectedContact.imagge
+          ? selectedContact.image
+          : ''
+        : ''
+    );
   }, []);
 
   // Change contact form 'Content-Type' to multipart/form-data
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const newContact = {
-      name,
-      phone,
-      email,
-      address,
-    };
+    const form_data = new FormData();
+    form_data.append('name', name);
+    form_data.append('phone', phone);
+    form_data.append('email', email);
+    form_data.append('address', address);
+    form_data.append('image', image);
+    const newContact = form_data;
+    console.log(newContact.get('image'));
 
     edit
       ? dispatch(updateContact(newContact, id))
@@ -67,7 +76,12 @@ function ContactForm({ edit, selectedContact, id }) {
     SetPhone('');
     SetEmail('');
     SetAddress('');
+    setImage(null);
     navigate('/');
+  };
+
+  const handleImageChange = (event) => {
+    setImage(event.target.files[0]);
   };
 
   if (isLoading) return <Loader />;
@@ -128,6 +142,16 @@ function ContactForm({ edit, selectedContact, id }) {
             name='address'
             className='form-input'
             onChange={(event) => SetAddress(event.target.value)}
+          />
+        </div>
+
+        <div className='form-item'>
+          <label htmlFor='image'>Image:</label>
+          <input
+            type='file'
+            placeholder='Upload an image file'
+            onChange={handleImageChange}
+            name='image'
           />
         </div>
 

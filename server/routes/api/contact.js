@@ -6,6 +6,7 @@ const schema = require('../../utils/schema');
 
 // Contact Model
 const Contact = require('../../models/contact');
+const parser = require('../../middleware/cloudinary.config');
 
 // @route GET /contacts
 // @desc Get All Contacts
@@ -20,8 +21,9 @@ router.get('/contacts', auth, (req, res) => {
 router.post(
   '/contacts',
   auth,
-  validation.validateBody(schema.contactSchema),
+
   (req, res) => {
+    console.log(req.body);
     const { name, phone, email, address } = req.body;
 
     const newContact = new Contact({
@@ -29,8 +31,18 @@ router.post(
       phone,
       email,
       address,
+      // image: req.file.path,
       owner: req.user.id,
     });
+
+    // try {
+    //   await image.save();
+    // } catch (err) {
+    //   return res.status(400).json({
+    //     message: `Upload failed. Check ${error}`,
+    //     status: 'error',
+    //   });
+    // }
 
     newContact
       .save()
